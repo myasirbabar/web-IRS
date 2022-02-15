@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <title>Search Engine</title>
+{% endblock %}
+
+{% block body %}
+
+    <script>
+        var text = "{{search}}";
+        document.addEventListener("DOMContentLoaded", function() {
+            make_bold(text);
+        });
+    </script>
+
+    <center>
+    <h1>Type The Query in the following box </h1>
+    <!-- 
+        - the following url_for('IRS') generates url pattern defined in app.route for the IRS function.
+        - Alternatively if we write action = "IRS" 
+            -> This will make url localhost:5000/IRS and in app.py wrt app.route it will call IRS function 
+    -->
+    <form action="{{ url_for('IRS') }}" method="post">
+        <input type="text" name="search" id="search" placeholder="Input Query">
+        
+        <br><br>
+
+        <button type="submit">Search Now</button>
+    </form>
+    </center>
+    <br><hr>
+    <div>
+        {% if text != null %}
+
+            <h2>Showing Results for <span style = color:red>"{{search}}"</span>  </h2>
+            <p id = "results">
+                {{text}}
+            </p>
+
+        {% endif %}
+    </div>
+{% endblock %}
